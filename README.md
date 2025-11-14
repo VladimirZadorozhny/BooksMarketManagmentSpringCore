@@ -1,7 +1,7 @@
-### Books Market (Console) — Pet Project
+# Books Market Console Application - Pet Project
 
 A small Spring Boot console application that simulates a tiny “books market” (library).
-It built as a study/practice app, runs in the terminal, uses plain SQL via Spring JDBC,
+It is built as a study/practice app, runs in the terminal, uses plain SQL via Spring JDBC
 and demonstrates a simple layered design (domain → repositories → services → console UI).
 
 ---
@@ -9,7 +9,7 @@ and demonstrates a simple layered design (domain → repositories → services �
 ### Features
 - Users: list, find by id/name/email, create
 - Authors: list, find by id/name, create
-- Books: list, find by id/title/year/author; show available/unavailable
+- show available/unavailable books
 - Rent/return books with validation and row locking (SELECT … FOR UPDATE)
 - Interactive console menu (no web UI)
 
@@ -18,11 +18,11 @@ and demonstrates a simple layered design (domain → repositories → services �
 - Spring JDBC (JdbcClient) — no ORM
 - MySQL 8.x
 - Flyway for DB migrations
-- JUnit + Mockito tests
+- JUnit and Mockito for testing
 - Maven
 
 #### Using Maven Wrapper (recommended)
-The project includes Maven Wrapper files (`mvnw`, `mvnw.cmd`). If plain `mvn` doesn’t work or Maven isn’t installed, use the wrapper:
+The project includes Maven Wrapper files (`mvnw`, `mvnw.cmd`). If `mvn` is not available or Maven is not installed, use the wrapper:
 
 - Linux/macOS: `./mvnw <goal>`
 - Windows PowerShell: `./mvnw <goal>`
@@ -55,9 +55,9 @@ docker-compose.yml
 
 2) Run the app (from project root)
    mvn spring-boot:run
-   or with Maven Wrapper
-   ./mvnw spring-boot:run   for Linux/macOS or Windows PowerShell and
-   mvnw.cmd spring-boot:run  for Windows CMD
+   # or with Maven Wrapper:
+   ./mvnw spring-boot:run   # for Linux/macOS or Windows PowerShell
+   mvnw.cmd spring-boot:run # for Windows CMD
 
 3) What happens on first start:
 - Spring Boot connects to MySQL using the credentials above (configurable via env vars below).
@@ -96,14 +96,14 @@ To stop the database:
    ./mvnw spring-boot:run   for Linux/macOS or Windows PowerShell and
    mvnw.cmd spring-boot:run  for Windows CMD
 
-Flyway will auto‑create tables and insert demo data on the first run.
+Flyway will automatically create tables and insert demo data on the first run.
 
-Note: You can still use the original script src/main/resources/sql/booksMarket.sql to reset a DB manually, but Flyway is the default way.
+Note: While \`src/main/resources/sql/booksMarket.sql\` can still be used to manually reset the database, Flyway is the recommended approach for migrations.
 
 ---
 
 ### Configuration notes
-application.properties reads DB settings from environment variables with safe defaults:
+The \`application.properties\` file reads database settings from environment variables, providing safe defaults:
    spring.datasource.url=${DB_URL:jdbc:mysql://localhost:3307/booksmarket}
    spring.datasource.username=${DB_USER:user1}
    spring.datasource.password=${DB_PASSWORD:user1}
@@ -124,9 +124,9 @@ Tests expect a running MySQL instance.
 
 ### Troubleshooting
 - Can’t connect to DB: check DB_URL, DB_USER, DB_PASSWORD, and that MySQL is listening on 3306.
-- Build complains about Flyway version: run "mvn -U clean package" (or "./mvnw -U clean package") to update dependencies.
+- Build complains about Flyway version: Run \`mvn -U clean package\` (or \`./mvnw -U clean package\`) to update dependencies.
 - MySQL in Docker keeps old data: remove the named volume with "docker compose down -v" (this resets the DB!).
 - If MySQL ever boot‑loops: docker compose down -v to reset the volume, then docker compose up -d.
-- Port conflict on (for example 3307) → either free it or remap to another host port (for example 3308) and set DB_URL accordingly.
+- Port conflict (e.g., on 3307): Either free the port or remap it to another host port (e.g., 3308) and adjust \`DB_URL\` accordingly.
 ---
 
