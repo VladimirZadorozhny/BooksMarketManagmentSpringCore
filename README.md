@@ -81,12 +81,12 @@ To stop the database:
 
 2) Set connection parameters (recommended via environment variables):
    Windows PowerShell
-   $env:DB_URL="jdbc:mysql://localhost:3306/booksmarket"
+   $env:DB_URL="jdbc:mysql://localhost:3307/booksmarket"
    $env:DB_USER="user1"
    $env:DB_PASSWORD="user1"
 
    Linux/macOS
-   export DB_URL="jdbc:mysql://localhost:3306/booksmarket"
+   export DB_URL="jdbc:mysql://localhost:3307/booksmarket"
    export DB_USER="user1"
    export DB_PASSWORD="user1"
 
@@ -104,7 +104,7 @@ Note: You can still use the original script src/main/resources/sql/booksMarket.s
 
 ### Configuration notes
 application.properties reads DB settings from environment variables with safe defaults:
-   spring.datasource.url=${DB_URL:jdbc:mysql://localhost:3306/booksmarket}
+   spring.datasource.url=${DB_URL:jdbc:mysql://localhost:3307/booksmarket}
    spring.datasource.username=${DB_USER:user1}
    spring.datasource.password=${DB_PASSWORD:user1}
    spring.flyway.enabled=true
@@ -126,6 +126,7 @@ Tests expect a running MySQL instance.
 - Can’t connect to DB: check DB_URL, DB_USER, DB_PASSWORD, and that MySQL is listening on 3306.
 - Build complains about Flyway version: run "mvn -U clean package" (or "./mvnw -U clean package") to update dependencies.
 - MySQL in Docker keeps old data: remove the named volume with "docker compose down -v" (this resets the DB!).
-
+- If MySQL ever boot‑loops: docker compose down -v to reset the volume, then docker compose up -d.
+- Port conflict on (for example 3307) → either free it or remap to another host port (for example 3308) and set DB_URL accordingly.
 ---
 
