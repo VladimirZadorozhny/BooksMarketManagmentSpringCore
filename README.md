@@ -51,7 +51,7 @@ docker-compose.yml
 1) Start MySQL in Docker
    docker compose up -d
 
-   This creates a booksmarket database with user "user1" and password "user1" on port 3306.
+   This creates a booksmarket database with user "user1" and password "user1" on port 3307.
 
 2) Run the app (from project root)
    mvn spring-boot:run
@@ -123,7 +123,7 @@ Tests expect a running MySQL instance.
 ---
 
 ### Troubleshooting
-- Can’t connect to DB: check DB_URL, DB_USER, DB_PASSWORD, and that MySQL is listening on 3306.
+- Can’t connect to DB: check DB_URL, DB_USER, DB_PASSWORD, and that MySQL is listening on 3307.
 - Build complains about Flyway version: Run \`mvn -U clean package\` (or \`./mvnw -U clean package\`) to update dependencies.
 - MySQL in Docker keeps old data: remove the named volume with "docker compose down -v" (this resets the DB!).
 - If MySQL ever boot‑loops: docker compose down -v to reset the volume, then docker compose up -d.
